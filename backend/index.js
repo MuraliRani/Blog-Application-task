@@ -29,7 +29,7 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // CORS configuration
 app.use(cors({
-  origin: ["https://blog-application-task-frontend.onrender.com", "http://localhost:5173"],
+  origin: ["https://blog-application-task-frontend.onrender.com"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
