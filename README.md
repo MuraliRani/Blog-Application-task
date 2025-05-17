@@ -3,6 +3,7 @@
 A fully functional Blog Application built using the MERN Stack (MongoDB, Express.js, React.js, Node.js), styled with Tailwind CSS, and powered by Vite for lightning-fast development. This application allows users to create, read, update, and delete blog posts with a seamless user experience and clean UI.
 
 **🚀 Features**
+===============
 
 🔐 User Authentication (JWT-based)
 
@@ -21,8 +22,10 @@ A fully functional Blog Application built using the MERN Stack (MongoDB, Express
 🔎 Search and filter functionality (optional)
 
 **🛠️ Tech Stack**
+=================
 
 **Frontend**
+============
 
 React.js (with Vite)
 
@@ -33,6 +36,7 @@ Axios (for API calls)
 React Router DOM
 
 **Backend**
+===========
 
 Node.js
 
