@@ -11,6 +11,8 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const commentRoute = require("./routes/comments");
 
+//middlewares
+dotenv.config();
 //database
 const connectDB = async () => {
   try {
@@ -21,8 +23,6 @@ const connectDB = async () => {
   }
 };
 
-//middlewares
-dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(cors({ origin: "https://blog-application-task-frontend.onrender.com", credentials: true }));
