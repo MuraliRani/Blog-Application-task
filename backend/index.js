@@ -11,8 +11,6 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const commentRoute = require("./routes/comments");
 
-//middlewares
-dotenv.config();
 //database
 const connectDB = async () => {
   try {
@@ -20,13 +18,31 @@ const connectDB = async () => {
     console.log("database is connected successfully!");
   } catch (err) {
     console.log(err);
+    process.exit(1);
   }
 };
 
+//middlewares
+dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
-app.use(cors({ origin: "https://blog-application-task-frontend.onrender.com", credentials: true }));
+
+// CORS configuration
+app.use(cors({
+  origin: ["https://blog-application-task-frontend.onrender.com", "http://localhost:5173"],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
+
 app.use(cookieParser());
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong!", error: err.message });
+});
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
@@ -49,7 +65,13 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("Image has been uploaded successfully!");
 });
 
-app.listen(process.env.PORT, () => {
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Server is running" });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
   connectDB();
-  console.log("app is running on port " + process.env.PORT);
+  console.log("app is running on port " + PORT);
 });
