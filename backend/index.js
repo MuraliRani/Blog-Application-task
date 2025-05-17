@@ -36,7 +36,6 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
