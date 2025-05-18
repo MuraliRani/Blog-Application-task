@@ -24,17 +24,17 @@ const connectDB = async () => {
 
 //middlewares
 dotenv.config();
-app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // CORS configuration
 app.use(cors({
-  origin: ["https://blog-application-task-frontend.onrender.com"],
+  origin: ["https://blog-application-task-frontend.onrender.com","http://localhost:5173"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 
+app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(cookieParser());
 // Error handling middleware
 app.use((err, req, res, next) => {
